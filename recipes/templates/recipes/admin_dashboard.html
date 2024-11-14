@@ -1,0 +1,31 @@
+<!-- myproject/recipes/templates/recipes/admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3 class="mb-4">Статистика пользователей</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Пользователь</th>
+                    <th>Количество рецептов</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in user_stats %}
+                    <tr>
+                        <td>{{ stat.user.username }}</td>
+                        <td>{{ stat.recipe_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

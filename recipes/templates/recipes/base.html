@@ -17,7 +17,12 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'home' %}" class="btn btn-light btn-sm mx-1">Главная</a>
                     <a href="{% url 'add_recipe' %}" class="btn btn-success btn-sm mx-1">Добавить рецепт</a>
-                    <a href="{% url 'logout' %}" class="btn btn-danger btn-sm mx-1">Выйти</a>
+                    
+                    <!-- Форма выхода с POST-запросом -->
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm mx-1">Выйти</button>
+                    </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-warning btn-sm mx-1">Войти</a>
                     <a href="{% url 'register' %}" class="btn btn-secondary btn-sm mx-1">Регистрация</a>

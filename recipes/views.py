@@ -1,9 +1,13 @@
+# myproject/recipes/views.py
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Recipe, Category
-from .forms import RecipeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from .models import Recipe, Category
+from django.contrib.auth.models import User
+from .forms import RecipeForm
+
+
 
 # Главная страница, случайные рецепты
 def home(request):
@@ -51,3 +55,14 @@ def login_view(request):
             login(request, user)
             return redirect('home')
     return render(request, 'recipes/login.html')
+
+# Страница статистики для админов
+def admin_dashboard(request):
+    users = User.objects.all()
+    user_stats = []
+
+    for user in users:
+        recipe_count = Recipe.objects.filter(author=user).count()
+        user_stats.append({'user': user, 'recipe_count': recipe_count})
+
+    return render(request, 'recipes/admin_dashboard.html', {'user_stats': user_stats})
