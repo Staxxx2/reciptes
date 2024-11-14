@@ -54,7 +54,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,9 +66,9 @@ TEMPLATES = [
         },
     },
 ]
-
+STATICFILES_DIRS = [BASE_DIR / 'static']
 WSGI_APPLICATION = 'myproject.wsgi.application'
-
+LOGOUT_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
